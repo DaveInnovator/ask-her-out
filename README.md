@@ -1,12 +1,40 @@
-# React + Vite
+# 💘 LoveLink - Confess with Vibes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+LoveLink is a cute, romantic web app where you can shoot your shot — the digital way. 🎯  
+Drop your crush's name, add your WhatsApp number, and let the magic (plus a little lofi) do the talking.
 
-Currently, two official plugins are available:
+Built with **React + Tailwind + Framer Motion**  
+Designed to make hearts flutter and DMs slide 💬❤️
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🔥 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🎧 Lofi background music for the perfect mood
+- 💌 Floating hearts and smooth animations
+- 💬 Confession message with YES/NO options
+- 📲 WhatsApp redirection if accepted
+- 📝 Option to leave a love quote if rejected
+- 🔗 Shareable unique link for each crush (auto-generates)
+
+---
+
+## 👥 How It Works
+
+### Sender Flow:
+1. Input your crush’s name 💖
+2. Input your WhatsApp number 📱
+3. Get a shareable link like:https://lovelink.com?role=receiver&name=Jessica
+4.  Share it with your crush and pray for YES 🤞
+
+### Receiver Flow:
+1. Clicks link → skips straight to the "Do you like me?" screen 😳
+2. Clicks **YES** → gets redirected to your WhatsApp 💬
+3. Clicks **NO** → gets to drop their own number and leave a soft rejection quote 😅
+
+- **React** (w/ Vite)
+- **Tailwind CSS** for styling
+- **Framer Motion** for smooth love animations
+- **LocalStorage** to remember user progress
+- **Confetti** for those sweet yes moments
+- **WhatsApp deep link** for easy communication
