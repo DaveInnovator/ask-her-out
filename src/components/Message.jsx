@@ -9,7 +9,7 @@ export default function Message({ name }) {
       className="text-lg text-gray-700 mb-6"
     >
       Hey {name || "you"}, I just wanted to say... you’ve been on my mind a lot lately. 🥺
-      and i'll you to be mine? 💕
+      and i'll want  you to be mine? 💕
     </motion.p>
   );
 }
