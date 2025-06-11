@@ -22,7 +22,7 @@ export default function CTAButtons({ onAccept, onMaybe, name }) {
 
   const confirmNo = () => {
     if (!loveQuote) return;
-    onMaybe(); // You can pass loveQuote as a param if needed
+    onMaybe(); 
   };
 
   return (
@@ -46,7 +46,7 @@ export default function CTAButtons({ onAccept, onMaybe, name }) {
 
       {showYesInput && (
         <div className="space-y-3">
-          <p className="text-sm text-gray-600">Drop your WhatsApp number so I can text you 😉</p>
+          <p className="text-sm text-gray-600">Drop sender's number so you can text them😉</p>
           <input
             type="tel"
             placeholder="e.g. 2348012345678"

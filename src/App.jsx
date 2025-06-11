@@ -7,8 +7,8 @@ import Confetti from "react-confetti";
 import { motion } from "framer-motion";
 import Footer from "./components/footer";
 
-
 export default function App() {
+  const [copied, setCopied] = useState(false);
   const queryParams = new URLSearchParams(window.location.search);
   const role = queryParams.get("role") || "sender";
   const receiverParamName = queryParams.get("name") || "";
@@ -98,9 +98,20 @@ export default function App() {
   };
 
   const handleMaybe = () => {
+    if (!receiverPhone.trim()) return;
+
+    const cleanNumber = sanitizePhone(senderPhone || receiverPhone);
+    const message = encodeURIComponent(
+      quote.trim() || "Sorry, you're amazing but I’m not ready for love right now 💔"
+    );
+
     setAccepted(false);
     setStep("result");
     localStorage.setItem("step", "result");
+
+    setTimeout(() => {
+      window.location.href = `https://wa.me/${cleanNumber}?text=${message}`;
+    }, 3000);
   };
 
   const resetFlow = () => {
@@ -118,7 +129,6 @@ export default function App() {
       <main className="min-h-screen w-full bg-gradient-to-b from-rose-100 via-pink-200 to-rose-300 flex items-center justify-center p-4 overflow-hidden relative">
         {accepted && <Confetti />}
 
-        {/* 💘 Heart Button */}
         <motion.button
           onClick={toggleMute}
           className="absolute top-6 right-6 bg-white border-4 border-pink-300 shadow-2xl rounded-full p-5 hover:scale-110 transition-all duration-300 z-50"
@@ -189,16 +199,49 @@ export default function App() {
             <>
               <Header name={crushName} onSubmit={handleSetName} />
               <Message name={crushName} />
-              <CTAButtons onAccept={handleAccept} onMaybe={handleMaybe} />
+              <CTAButtons onAccept={handleAccept} onMaybe={() => setStep("result")} />
               {role === "sender" && (
                 <div className="mt-6 text-sm text-gray-500">
                   Share this link with your crush:
                   <br />
-                  <span className="font-mono bg-gray-100 p-1 rounded break-all inline-block mt-1">
-                    {`${window.location.origin}?role=receiver&name=${encodeURIComponent(
-                      crushName
-                    )}`}
-                  </span>
+                  <div className="flex flex-col items-start gap-2 mt-1 w-full">
+  <div className="flex items-center gap-2 flex-wrap">
+    <span
+      className="font-mono bg-gray-100 p-1 rounded break-all inline-block"
+    >
+      {`${window.location.origin}?role=receiver&name=${encodeURIComponent(
+        crushName
+      )}`}
+    </span>
+    <button
+      onClick={() => {
+        const link = `${window.location.origin}?role=receiver&name=${encodeURIComponent(
+          crushName
+        )}`;
+        navigator.clipboard.writeText(link).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000); // reset after 2 sec
+        });
+      }}
+      className="bg-pink-500 text-white px-3 py-1 rounded hover:bg-pink-600 transition-all text-sm"
+    >
+      Copy
+    </button>
+  </div>
+
+  {copied && (
+    <motion.div
+      initial={{ opacity: 0, y: -5 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -5 }}
+      transition={{ duration: 0.3 }}
+      className="text-green-600 text-sm mt-1"
+    >
+      ✅ Copied!
+    </motion.div>
+  )}
+</div>
+
                 </div>
               )}
             </>
@@ -215,17 +258,23 @@ export default function App() {
                 <div className="mt-4 space-y-4">
                   <input
                     type="tel"
-                    placeholder="Your WhatsApp Number"
+                    placeholder="Drop sender's number"
                     value={receiverPhone}
                     onChange={(e) => setReceiverPhone(e.target.value)}
                     className="px-4 py-2 border rounded-xl w-full"
                   />
                   <textarea
-                    placeholder="Leave a kind love quote 💌"
+                    placeholder="Leave a kind message 💌"
                     value={quote}
                     onChange={(e) => setQuote(e.target.value)}
                     className="px-4 py-2 border rounded-xl w-full"
                   />
+                  <button
+                    onClick={handleMaybe}
+                    className="mt-2 bg-red-500 text-white px-6 py-2 rounded-xl hover:bg-red-600 transition-all"
+                  >
+                    Send Response
+                  </button>
                 </div>
               )}
               <ResultDisplay
@@ -247,7 +296,6 @@ export default function App() {
           )}
         </motion.div>
 
-        {/* Floating hearts */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           {[...Array(20)].map((_, i) => (
             <motion.div
@@ -270,7 +318,7 @@ export default function App() {
         </div>
       </main>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }
