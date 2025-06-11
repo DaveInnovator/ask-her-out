@@ -5,7 +5,8 @@ import CTAButtons from "./components/CTAButtons";
 import ResultDisplay from "./components/ResultDisplay";
 import Confetti from "react-confetti";
 import { motion } from "framer-motion";
-import Footer from "./components/Footer";
+import Footer from "./components/footer";
+
 
 export default function App() {
   const queryParams = new URLSearchParams(window.location.search);
@@ -269,7 +270,7 @@ export default function App() {
         </div>
       </main>
 
-      <Footer />
+      <Footer/>
     </>
   );
 }

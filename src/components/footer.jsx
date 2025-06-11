@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Brand Title */}
         <h2 className="text-gray-400 text-2xl font-bold tracking-tight">
-          💘 LoveLink
+          💘 Love2Link
         </h2>
 
         {/* Copyright and Credit */}
